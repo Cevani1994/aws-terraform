@@ -53,3 +53,8 @@ resource "aws_eip" "myFirstInstance" {
     Name = "jenkins_elstic_ip"
   }
 }
+
+# Encrypt 
+resource "aws_ebs_encryption_by_default" "enabled" {
+  enabled = true
+}
