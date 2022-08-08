@@ -41,7 +41,7 @@ resource "aws_instance" "myFirstInstance" {
   instance_type   = var.instance_type
   security_groups = ["security_jenkins_port"]
   tags = {
-    Name = "jenkins_instance"
+    Name = "jenkins_instance_1"
   }
 }
 
@@ -52,9 +52,4 @@ resource "aws_eip" "myFirstInstance" {
   tags = {
     Name = "jenkins_elstic_ip"
   }
-}
-
-# Encrypt 
-resource "aws_ebs_encryption_by_default" "enabled" {
-  enabled = true
 }
