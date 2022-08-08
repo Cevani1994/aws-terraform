@@ -15,14 +15,14 @@ resource "aws_security_group" "security_jenkins_port" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
- ingress {
+  ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
- # outbound from jenkis server
+  # outbound from jenkis server
   egress {
     from_port   = 0
     to_port     = 65535
@@ -30,17 +30,17 @@ resource "aws_security_group" "security_jenkins_port" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags= {
+  tags = {
     Name = "security_jenkins_port"
   }
 }
 
 resource "aws_instance" "myFirstInstance" {
-  ami           = "ami-0cff7528ff583bf9a"
-  key_name = var.key_name
-  instance_type = var.instance_type
-  security_groups= [ "security_jenkins_port"]
-  tags= {
+  ami             = "ami-0cff7528ff583bf9a"
+  key_name        = var.key_name
+  instance_type   = var.instance_type
+  security_groups = ["security_jenkins_port"]
+  tags = {
     Name = "jenkins_instance"
   }
 }
@@ -49,7 +49,7 @@ resource "aws_instance" "myFirstInstance" {
 resource "aws_eip" "myFirstInstance" {
   vpc      = true
   instance = aws_instance.myFirstInstance.id
-tags= {
+  tags = {
     Name = "jenkins_elstic_ip"
   }
 }
