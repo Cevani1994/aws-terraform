@@ -47,9 +47,29 @@ resource "aws_instance" "myFirstInstance" {
 
 # Create Elastic IP address
 resource "aws_eip" "myFirstInstance" {
-  vpc      = true
   instance = aws_instance.myFirstInstance.id
   tags = {
     Name = "jenkins_elstic_ip"
+  }
+}
+
+resource "aws_db_instance" "db_instance" {
+  allocated_storage    = 10
+  db_name              = "mydb"
+  engine               = "mysql"
+  engine_version       = "5.7"
+  instance_class       = "db.t3.micro"
+  username             = "foo"
+  password             = "foobarbaz"
+  parameter_group_name = "default.mysql5.7"
+  skip_final_snapshot  = true
+}
+
+resource "aws_s3_bucket" "my_bucket" {
+  bucket = "my-bucket-20232023"
+
+  tags = {
+    Name        = "My bucket"
+    Environment = "Dev"
   }
 }
